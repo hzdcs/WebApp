@@ -16,6 +16,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseStaticFiles();
+
+app.UseStatusCodePagesWithRedirects("/FeatureError.html");
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
