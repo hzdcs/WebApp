@@ -5,21 +5,13 @@ namespace WebApp.Services
 {
     public class SummaryServiceImpl : ISummaryService
     {
-        private static readonly string[] Summaries = new[]
+        private static readonly string[] SummariesData = new[]
         {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
-        #region Methoden
-        public string[] getSummaries()
-        {
-            return Summaries;
-        }
+        string[] ISummaryService.Summaries => SummariesData;
 
-        public int getLength()
-        {
-            return Summaries.Length;
-        }
-        #endregion
+        public int Length => SummariesData.Length;
     }
 }

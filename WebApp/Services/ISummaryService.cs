@@ -2,8 +2,8 @@
 {
     public interface ISummaryService
     {
-        string[] getSummaries();
+        string[] Summaries { get; }
 
-        int getLength();
+        int Length { get; }
     }
 }

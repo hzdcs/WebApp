@@ -4,6 +4,6 @@ namespace WebApp.Services
 {
     public interface IWeatherService
     {
-        IEnumerable<WeatherForecast> WeatherData();
+        IEnumerable<WeatherForecast> WeatherData { get; }
     }
 }

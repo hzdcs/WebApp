@@ -8,18 +8,17 @@ namespace WebApp.Controllers
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
-        private IWeatherService weatherService;
+        private IWeatherService WeatherService { get; set; }
 
         public WeatherForecastController(IWeatherService weatherService)
         {
-            this.weatherService = weatherService;
+            WeatherService = weatherService;
         }
 
-    [HttpGet(Name = "GetWeatherForecast")]
-
+        [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {
-            return weatherService.WeatherData();
+            return WeatherService.WeatherData;
         }
     }
 }
