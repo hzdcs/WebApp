@@ -6,17 +6,14 @@ namespace WebApp.Controllers
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
+        private IMyService myService;
+        public WeatherForecastController(IMyService myService, ILogger<WeatherForecastController> logger)
         {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
-
-        private readonly ILogger<WeatherForecastController> _logger;
-
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
-        {
+            this.myService = myService;
             _logger = logger;
         }
+
+        private readonly ILogger<WeatherForecastController> _logger;
 
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
@@ -25,7 +22,7 @@ namespace WebApp.Controllers
             {
                 Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
                 TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
+                Summary = myService.getSummaries()[Random.Shared.Next(myService.getSummaries().Length)]
             })
             .ToArray();
         }
