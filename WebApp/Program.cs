@@ -10,7 +10,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddSingleton<IWeatherService, WeatherServiceImpl>();
+builder.Services.AddTransient<IWeatherService, WeatherServiceImpl>();
 builder.Services.AddSingleton<ISummaryService, SummaryServiceImpl>();
 
 var app = builder.Build();
