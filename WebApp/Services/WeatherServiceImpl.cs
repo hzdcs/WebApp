@@ -1,16 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Xml.Linq;
-using WebApp.ControllerClasses;
+using WebApp.Interfaces;
+using WebApp.Models;
+using WebApp.Services;
 
-namespace WebApp.Controllers.MyWeatherServices
+namespace WebApp.Services
 {
-    public class MyTempServiceImpl : IMyWeatherServices
+    public class WeatherServiceImpl : IWeatherService
     {
-        private static readonly string[] Summaries = new[]
+        private ISummaryService summaryService;
+        public WeatherServiceImpl(ISummaryService summaryService)
         {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
+            this.summaryService = summaryService;
+        }
         /// <summary>
         /// Wettertestdaten werden zufällig erzeugt.
         /// </summary>
@@ -21,19 +23,10 @@ namespace WebApp.Controllers.MyWeatherServices
             {
                 Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
                 TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = getSummaries()[Random.Shared.Next(getLenght())]
+                Summary = summaryService.getSummaries()[Random.Shared.Next(summaryService.getLength())]
             })
             .ToArray();
         }
 
-        public string[] getSummaries()
-        {
-            return Summaries;
-        }
-
-        public int getLenght()
-        {
-            return Summaries.Length;
-        }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace WebApp.Interfaces
 {
-    public interface IMyService
+    public interface ISummaryService
     {
         string[] getSummaries();
 

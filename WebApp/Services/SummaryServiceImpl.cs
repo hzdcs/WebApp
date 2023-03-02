@@ -1,10 +1,9 @@
 ﻿using System;
 using WebApp.Interfaces;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace WebApp
+namespace WebApp.Services
 {
-    public class MyServiceImpl : IMyService
+    public class SummaryServiceImpl : ISummaryService
     {
         private static readonly string[] Summaries = new[]
         {
