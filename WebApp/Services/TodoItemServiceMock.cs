@@ -1,32 +1,68 @@
-﻿using WebApp.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using WebApp.Models;
 
 namespace WebApp.Services
 {
     public class TodoItemServiceMock : ITodoService
     {
-        public void deleteTodo(TodoItem item)
-        {
-            throw new NotImplementedException();
-        }
+        private List<TodoItem> todoItemList;
 
-        public TodoItem GetTodo(int id)
+        public List<TodoItem> TodoItemList
         {
-            throw new NotImplementedException();
+            get
+            {
+                if (todoItemList == null )
+                {
+                    todoItemList= new List<TodoItem>();
+                }
+                return todoItemList;
+            }
         }
 
         public TodoItem GetTodoItem()
         {
-            throw new NotImplementedException();
+            return TodoItemList.ToArray();
         }
 
-        public void insertTodo(TodoItem item)
+        public TodoItem GetTodo(int id)
         {
-            throw new NotImplementedException();
+            if (!(TodoItemList.Id == id))
+            {
+                return null;
+            }
+            return TodoItemList;
         }
 
         public void updateTodo(TodoItem item)
         {
-            throw new NotImplementedException();
+            TodoItemList = item;
+            return TodoItemList();
+        }
+
+        public void insertTodo(TodoItem item)
+        {
+            TodoItemList.Add(todoItem);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetTodoItem), new { id = todoItem.Id }, todoItem);
+        }
+
+        public void deleteTodo(TodoItem item)
+        {
+            if (_context.TodoItem == null)
+            {
+                return NotFound();
+            }
+            var todoItem = await _context.TodoItem.FindAsync(id);
+            if (todoItem == null)
+            {
+                return NotFound();
+            }
+
+            _context.TodoItem.Remove(todoItem);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
         }
     }
 }

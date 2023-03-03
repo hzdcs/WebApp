@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using WebApp.Data;
 using WebApp.Models;
+using WebApp.Services;
 
 namespace WebApp.Controllers
 {
@@ -14,27 +14,19 @@ namespace WebApp.Controllers
     [ApiController]
     public class TodoItemsController : ControllerBase
     {
-        private readonly TodoItemContext _context;
-
-        public TodoItemsController(TodoItemContext context)
-        {
-            _context = context;
-        }
+        [FromServices]
+        public ITodoService TodoService { get; set; }
 
         // GET: api/TodoItems
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TodoItem>>> GetTodoItem()
         {
-          if (_context.TodoItem == null)
-          {
-              return NotFound();
-          }
-            return await _context.TodoItem.ToListAsync();
+          
         }
 
         // GET: api/TodoItems/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<TodoItem>> GetTodoItem(int id)
+        public async Task<ActionResult<TodoItem>> GetTodo(int id)
         {
           if (_context.TodoItem == null)
           {
@@ -93,7 +85,7 @@ namespace WebApp.Controllers
             _context.TodoItem.Add(todoItem);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTodoItem", new { id = todoItem.Id }, todoItem);
+            return CreatedAtAction(nameof(GetTodoItem), new { id = todoItem.Id }, todoItem);
         }
 
         // DELETE: api/TodoItems/5
