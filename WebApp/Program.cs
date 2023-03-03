@@ -1,6 +1,8 @@
-using WebApp.Controllers.MyWeatherServices;
 using WebApp;
 using WebApp.Interfaces;
+using WebApp.Services;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +12,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddSingleton<IMyWeatherServices, MyTempServiceImpl>();
+builder.Services.AddTransient<ITodoService, TodoItemServiceMock>();
+builder.Services.AddTransient<IWeatherService, WeatherServiceImpl>();
+builder.Services.AddSingleton<ISummaryService, SummaryServiceImpl>();
 
 var app = builder.Build();
 
