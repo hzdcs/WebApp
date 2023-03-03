@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using WebApp.ControllerClasses;
-using WebApp.Controllers.MyWeatherServices;
+using WebApp.Models;
+using WebApp.Services;
 
 namespace WebApp.Controllers
 {
@@ -8,21 +8,13 @@ namespace WebApp.Controllers
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
-        private IMyWeatherServices myService;
-        private readonly ILogger<WeatherForecastController> mylogger;
+        [FromServices]
+        public IWeatherService WeatherService { get; set; }
 
-
-        public WeatherForecastController(IMyWeatherServices myService, ILogger<WeatherForecastController> logger)
-        {
-            this.myService = myService;
-            mylogger = logger;    
-        }
-
-    [HttpGet(Name = "GetWeatherForecast")]
-
+        [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {
-            return myService.WeatherData();
+            return WeatherService.WeatherData;
         }
     }
 }
