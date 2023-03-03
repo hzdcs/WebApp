@@ -11,58 +11,35 @@ namespace WebApp.Services
         {
             get
             {
-                if (todoItemList == null )
-                {
-                    todoItemList= new List<TodoItem>();
-                }
-                return todoItemList;
+                return new List<TodoItem>();
             }
         }
 
         public TodoItem GetTodoItem()
         {
-            return TodoItemList.ToArray();
+            return new TodoItem();
         }
 
         public TodoItem GetTodo(int id)
         {
-            if (!(TodoItemList.Id == id))
-            {
-                return null;
-            }
-            return TodoItemList;
+            return new TodoItem();
         }
 
         public void updateTodo(TodoItem item)
         {
-            TodoItemList = item;
-            return TodoItemList();
         }
 
         public void insertTodo(TodoItem item)
         {
-            TodoItemList.Add(todoItem);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetTodoItem), new { id = todoItem.Id }, todoItem);
         }
 
         public void deleteTodo(TodoItem item)
         {
-            if (_context.TodoItem == null)
-            {
-                return NotFound();
-            }
-            var todoItem = await _context.TodoItem.FindAsync(id);
-            if (todoItem == null)
-            {
-                return NotFound();
-            }
+        }
 
-            _context.TodoItem.Remove(todoItem);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+        public IEnumerable<TodoItem> GetAll()
+        {
+            return new List<TodoItem>();
         }
     }
 }

@@ -12,6 +12,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddTransient<ITodoService, TodoItemServiceMock>();
 builder.Services.AddTransient<IWeatherService, WeatherServiceImpl>();
 builder.Services.AddSingleton<ISummaryService, SummaryServiceImpl>();
 

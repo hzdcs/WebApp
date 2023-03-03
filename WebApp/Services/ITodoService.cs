@@ -6,6 +6,7 @@ namespace WebApp.Services
     {
         TodoItem GetTodo(int id);
         TodoItem GetTodoItem();
+        IEnumerable<TodoItem> GetAll();
 
         void deleteTodo(TodoItem item);
         void insertTodo(TodoItem item);
