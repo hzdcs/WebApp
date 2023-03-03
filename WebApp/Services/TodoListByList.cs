@@ -1,9 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using WebApp.Models;
+﻿using WebApp.Models;
 
 namespace WebApp.Services
 {
-    public class TodoItemServiceMock : ITodoService
+    public class TodoListByList : ITodoService
     {
         private List<TodoItem> todoItemsList;
 
@@ -14,11 +13,6 @@ namespace WebApp.Services
                 if (todoItemsList == null)
                 {
                     todoItemsList = new List<TodoItem>();
-                    var tmpItem = new TodoItem();
-                    tmpItem.Id = 1;
-                    tmpItem.Titel = "Test1";
-                    tmpItem.IsCompleted = false;
-                    todoItemsList.Add(tmpItem);
                 }
                 return todoItemsList;
             }
@@ -26,7 +20,7 @@ namespace WebApp.Services
 
         public void deleteTodo(int id)
         {
-            var tmpItem = TodoItemsList.FirstOrDefault(item => item.Id == id);
+            var tmpItem = TodoItemsList.FirstOrDefault(item=> item.Id == id);
             TodoItemsList.Remove(tmpItem);
         }
 

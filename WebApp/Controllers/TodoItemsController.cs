@@ -36,6 +36,7 @@ namespace WebApp.Controllers
         [HttpPut("{id}")]
         public void PutTodoItem(int id, TodoItem todoItem)
         {
+            TodoService.updateTodo(todoItem);
         }
 
         // POST: api/TodoItems
@@ -43,12 +44,14 @@ namespace WebApp.Controllers
         [HttpPost]
         public void PostTodoItem(TodoItem todoItem)
         {
+            TodoService.insertTodo(todoItem);
         }
 
         // DELETE: api/TodoItems/5
         [HttpDelete("{id}")]
         public void DeleteTodoItem(int id)
         {
+            TodoService.deleteTodo(id);
         }
 
         private bool TodoItemExists(int id)
